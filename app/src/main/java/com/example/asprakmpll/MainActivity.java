@@ -10,10 +10,11 @@ import android.widget.Button;
 import com.example.asprakmpll.Activity.Explicit.FirstActivity;
 import com.example.asprakmpll.Activity.Implicit.ImplicitIntentActivity;
 import com.example.asprakmpll.Activity.Passing.InputActivity;
+import com.example.asprakmpll.RoomDatabase.UI.RoomDataActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button explicit, implicit, intent;
+    Button explicit, implicit, intent, roomdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         implicit.setOnClickListener(new Click());
         intent = findViewById(R.id.btnIntent);
         intent.setOnClickListener(new Click());
+        roomdb = findViewById(R.id.btnRoomDatabase);
+        roomdb.setOnClickListener(new Click());
 
     }
 
@@ -45,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btnIntent:
                     Intent intent = new Intent(MainActivity.this, InputActivity.class);
                     startActivity(intent);
+                    break;
+                case R.id.btnRoomDatabase:
+                    Intent roomdb = new Intent(MainActivity.this, RoomDataActivity.class);
+                    startActivity(roomdb);
                     break;
             }
         }
