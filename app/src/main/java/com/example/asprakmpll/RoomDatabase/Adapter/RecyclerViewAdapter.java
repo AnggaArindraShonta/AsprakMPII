@@ -1,57 +1,141 @@
 package com.example.asprakmpll.RoomDatabase.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asprakmpll.R;
+import com.example.asprakmpll.RoomDatabase.Data.Database.MyApp;
 import com.example.asprakmpll.RoomDatabase.Data.Model.Mahasiswa;
+import com.example.asprakmpll.RoomDatabase.Data.common.DataListListener;
+import com.example.asprakmpll.RoomDatabase.UI.AddRoomDataActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
-    private Context mContext;
-    private List<Mahasiswa> albumList;
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+    private List<Mahasiswa> dataList = new ArrayList<>();
+    private DataListListener listener;
 
-        TextView nama, nim, kejuruan, alamat;
-        public MyViewHolder(View v) {
-            super(v);
-
-            nama = v.findViewById(R.id.tvNama);
-            nim = v.findViewById(R.id.tvNim);
-            kejuruan = v.findViewById(R.id.tvKejuruan);
-            alamat = v.findViewById(R.id.tvAlamat);
+    public void setData(List<Mahasiswa> dataList) {
+        for (int i = 0; i < dataList.size(); i++) {
+            Mahasiswa data = dataList.get(i);
+            int position = findPosition(data);
+            if (position == -1) {
+                this.dataList.add(data);
+                notifyItemInserted(this.dataList.size() - 1);
+            } else {
+                this.dataList.remove(position);
+                this.dataList.add(position, data);
+                notifyItemChanged(position);
+            }
         }
     }
-    public RecyclerViewAdapter (Context mContext,List<Mahasiswa>albumList){
-        this.mContext = mContext;
-        this.albumList = albumList;
+
+    private int findPosition(Mahasiswa data) {
+        int position = -1;
+
+        if (!this.dataList.isEmpty()) {
+            for (int i = 0; i < dataList.size(); i++) {
+                if (this.dataList.get(i).getId() == data.getId()) {
+                    position = i;
+                }
+            }
+        }
+
+        return position;
     }
+
+    public void removeData(Mahasiswa data) {
+        if (this.dataList.isEmpty()) {
+            return;
+        }
+
+        for (int i = 0; i < dataList.size(); i++) {
+            if (this.dataList.get(i).getId() == data.getId()) {
+                this.dataList.remove(i);
+                notifyItemRemoved(i);
+            }
+        }
+    }
+    public void setRemoveListener(DataListListener listener) {
+        this.listener = listener;
+    }
+
+    @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_mahasiswa, parent, false);
-
-        return new MyViewHolder(itemView);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mahasiswa, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
-        final Mahasiswa album = albumList.get(position);
-        holder.nama.setText(album.getNama());
-        holder.nim.setText(album.getNim());
-        holder.kejuruan.setText(album.getKejuruan());
-        holder.alamat.setText(album.getAlamat());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(dataList.get(position), listener);
     }
-
 
     @Override
     public int getItemCount() {
-        return albumList.size();
+        return dataList.size();
     }
+
+    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+
+        private TextView tvNama, tvNim,tvAlamat,tvKejuruan;
+        private ImageView btnHapus;
+        private Mahasiswa data;
+        private DataListListener listener;
+
+        ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvNama = itemView.findViewById(R.id.tvNama);
+            tvNim = itemView.findViewById(R.id.tvNim);
+            tvAlamat = itemView.findViewById(R.id.tvAlamat);
+            tvKejuruan = itemView.findViewById(R.id.tvKejuruan);
+            btnHapus = itemView.findViewById(R.id.btn_hapus);
+
+
+            itemView.setOnClickListener(this);
+            btnHapus.setOnClickListener(this);
+        }
+
+        void bind(Mahasiswa data, DataListListener listener) {
+            this.data = data;
+            this.listener = listener;
+
+            tvNama.setText(data.getNama());
+            tvNim.setText(data.getNim());
+            tvAlamat.setText(data.getAlamat());
+            tvKejuruan.setText(data.getKejuruan());
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.btn_hapus) {
+
+                MyApp.getInstance().getDatabase().userDao().delete(data);
+                listener.onRemoveClick(data);
+                Toast.makeText(itemView.getContext(), "Berhasil Dihapus", Toast.LENGTH_SHORT).show();
+
+            } else if (view.getId() == R.id.item_list) {
+
+                Intent intent = new Intent(itemView.getContext(), AddRoomDataActivity.class);
+                intent.putExtra(AddRoomDataActivity.TAG_DATA_INTENT, data.getId());
+                itemView.getContext().startActivity(intent);
+
+            }
+        }
+    }
+
 }
+

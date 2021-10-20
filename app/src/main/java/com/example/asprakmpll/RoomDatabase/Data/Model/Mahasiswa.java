@@ -28,6 +28,15 @@ public class Mahasiswa {
     public Mahasiswa() {
     }
 
+    public Mahasiswa(int id, String nama, String nim, String kejuruan, String alamat, String gambar) {
+        this.id = id;
+        this.nama = nama;
+        this.nim = nim;
+        this.kejuruan = kejuruan;
+        this.alamat = alamat;
+        this.gambar = gambar;
+    }
+
     public int getId() {
         return id;
     }

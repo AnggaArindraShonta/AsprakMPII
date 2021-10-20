@@ -1,8 +1,10 @@
 package com.example.asprakmpll.RoomDatabase.Data.DAO;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.asprakmpll.RoomDatabase.Data.Model.Mahasiswa;
 
@@ -15,9 +17,16 @@ public interface MahasiswaDAO {
     List<Mahasiswa> getAll();
 
     @Insert
-    void insertAll(Mahasiswa... mahasiswa);
+    void insertData(Mahasiswa mahasiswa);
 
-    //Custum Query
-    @Query("SELECT * FROM mahasiswa WHERE nama LIKE :nama ")
-    Mahasiswa findByName(String nama);
+    @Query("SELECT * FROM mahasiswa WHERE id LIKE :mahasiswaId LIMIT 1")
+    Mahasiswa findById(int mahasiswaId);
+
+    @Update
+    void update(Mahasiswa mahasiswa);
+
+    @Delete
+    void delete(Mahasiswa mahasiswa);
+
+
 }

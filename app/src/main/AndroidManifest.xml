@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsprakMPll">
-        <activity android:name=".RoomDatabase.UI.ViewRoomDataActivity"></activity>
+        <activity
+            android:name=".RoomDatabase.UI.CrudActivity"
+            android:exported="true" />
+        <activity android:name=".RoomDatabase.UI.ViewRoomDataActivity" />
         <activity android:name=".RoomDatabase.UI.RoomDataActivity" />
         <activity android:name=".RoomDatabase.UI.AddRoomDataActivity" />
         <activity android:name=".Activity.Passing.OutputActivity" />

@@ -30,7 +30,7 @@ public class RoomDataActivity extends AppCompatActivity {
         btnLihat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RoomDataActivity.this, ViewRoomDataActivity.class);
+                Intent i = new Intent(RoomDataActivity.this, CrudActivity.class);
                 startActivity(i);
             }
         });

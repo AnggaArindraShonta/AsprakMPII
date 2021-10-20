@@ -54,7 +54,7 @@ public class ViewRoomDataActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         myRecyclerview.setLayoutManager(llm);
-        recycleAdapter = new RecyclerViewAdapter(this,listMahasiswas);
+//        recycleAdapter = new RecyclerViewAdapter(this,listMahasiswas);
     }
     private void setAdapter() {
         myRecyclerview.setAdapter(recycleAdapter);
