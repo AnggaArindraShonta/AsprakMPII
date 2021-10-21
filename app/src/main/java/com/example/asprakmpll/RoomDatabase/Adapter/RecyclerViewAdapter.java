@@ -103,9 +103,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tvKejuruan = itemView.findViewById(R.id.tvKejuruan);
             btnHapus = itemView.findViewById(R.id.btn_hapus);
 
-
-            itemView.setOnClickListener(this);
             btnHapus.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         void bind(Mahasiswa data, DataListListener listener) {

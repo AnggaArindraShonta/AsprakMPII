@@ -7,19 +7,19 @@
     tools:context=".RoomDatabase.UI.CrudActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_mahasiswa"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:id="@+id/rv_list_mahasiswa"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
         android:id="@+id/fab_tambah_data"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_add"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_add" />
 
 </RelativeLayout>

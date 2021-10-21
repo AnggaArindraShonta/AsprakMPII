@@ -16,11 +16,12 @@ public interface MahasiswaDAO {
     @Query("SELECT * FROM mahasiswa")
     List<Mahasiswa> getAll();
 
-    @Insert
-    void insertData(Mahasiswa mahasiswa);
 
     @Query("SELECT * FROM mahasiswa WHERE id LIKE :mahasiswaId LIMIT 1")
     Mahasiswa findById(int mahasiswaId);
+
+    @Insert
+    void insertData(Mahasiswa mahasiswa);
 
     @Update
     void update(Mahasiswa mahasiswa);

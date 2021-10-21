@@ -77,20 +77,5 @@ public class AddRoomDataActivity extends AppCompatActivity implements View.OnCli
         mahasiswa.setKejuruan(etKejuruan.getText().toString());
     }
 
-//    private void tambahData() {
-//        if (!etAlamat.getText().toString().isEmpty()&&!etKejuruan.getText().toString().isEmpty()&&
-//                !etNama.getText().toString().isEmpty()&&!etNim.getText().toString().isEmpty()){
-//
-//            mahasiswa = new Mahasiswa();
-//            mahasiswa.setAlamat(etAlamat.getText().toString());
-//            mahasiswa.setKejuruan(etKejuruan.getText().toString());
-//            mahasiswa.setNama(etNama.getText().toString());
-//            mahasiswa.setNim(etNim.getText().toString());
-//            //Insert data in database
-//            db.userDao().insertAll(mahasiswa);
-//            startActivity(new Intent(AddRoomDataActivity.this,RoomDataActivity.class));
-//        }else {
-//            Toast.makeText(this, "Mohon masukkan dengan benar", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+
 }
