@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AsprakMPll">
         <activity
+            android:name=".RoomDatabase.UI.WithFragmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RoomDatabase.UI.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".RoomDatabase.UI.CrudActivity"
             android:exported="true" />
         <activity android:name=".RoomDatabase.UI.ViewRoomDataActivity" />

@@ -10,11 +10,17 @@ import android.widget.Button;
 import com.example.asprakmpll.Activity.Explicit.FirstActivity;
 import com.example.asprakmpll.Activity.Implicit.ImplicitIntentActivity;
 import com.example.asprakmpll.Activity.Passing.InputActivity;
+import com.example.asprakmpll.RoomDatabase.Data.Model.Mahasiswa;
+import com.example.asprakmpll.RoomDatabase.Data.common.DataListListener;
+import com.example.asprakmpll.RoomDatabase.UI.AddRoomDataActivity;
+import com.example.asprakmpll.RoomDatabase.UI.CrudActivity;
+import com.example.asprakmpll.RoomDatabase.UI.HomeActivity;
 import com.example.asprakmpll.RoomDatabase.UI.RoomDataActivity;
+import com.example.asprakmpll.RoomDatabase.UI.WithFragmentActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button explicit, implicit, intent, roomdb;
+    Button explicit, implicit, intent, roomdb, bottomnav, fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,38 +28,48 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         explicit = findViewById(R.id.btnExplicit);
-        explicit.setOnClickListener(new Click());
         implicit = findViewById(R.id.btnImplicit);
-        implicit.setOnClickListener(new Click());
         intent = findViewById(R.id.btnIntent);
-        intent.setOnClickListener(new Click());
         roomdb = findViewById(R.id.btnRoomDatabase);
-        roomdb.setOnClickListener(new Click());
+        bottomnav = findViewById(R.id.btnBottomNav);
+        fragment = findViewById(R.id.btnFragment);
 
-    }
-
-    public class Click implements View.OnClickListener{
-
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btnExplicit:
-                    Intent explicit = new Intent(MainActivity.this, FirstActivity.class);
-                    startActivity(explicit);
-                    break;
-                case R.id.btnImplicit:
-                    Intent implicit = new Intent(MainActivity.this, ImplicitIntentActivity.class);
-                    startActivity(implicit);
-                    break;
-                case R.id.btnIntent:
-                    Intent intent = new Intent(MainActivity.this, InputActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.btnRoomDatabase:
-                    Intent roomdb = new Intent(MainActivity.this, RoomDataActivity.class);
-                    startActivity(roomdb);
-                    break;
+        explicit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, FirstActivity.class));
             }
-        }
+        });
+        implicit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ImplicitIntentActivity.class));
+            }
+        });
+        intent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, InputActivity.class));
+            }
+        });
+        roomdb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RoomDataActivity.class));
+            }
+        });
+        bottomnav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            }
+        });
+        fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, WithFragmentActivity.class));
+            }
+        });
+
     }
 }
